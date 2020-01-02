@@ -1,0 +1,41 @@
+{
+  "name": "cocktail-library",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-typescript": "^7.7.7",
+    "@types/aws-lambda": "^8.10.31",
+    "@types/dotenv": "^6.1.1",
+    "@types/jest": "^24.0.24",
+    "@types/node": "^10.14.7",
+    "copy-webpack-plugin": "^5.1.1",
+    "cpx": "^1.5.0",
+    "dotenv": "^8.0.0",
+    "http-server": "^0.12.0",
+    "jest": "^24.9.0",
+    "netlify-lambda": "^1.5.1",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "scripts": {
+    "build:functions": "netlify-lambda build src/functions",
+    "build:scripts": "tsc -p tsconfig.scripts.json",
+    "prebuild": "rimraf public && rimraf functions",
+    "build": "tsc && webpack --verbose && npm run build:functions",
+    "postbuild":"rimraf src-compiled",
+    "serve:backend": "netlify-lambda -s serve functions",
+    "serve:frontend": "http-server",
+    "test": "tsc && tsc -p tsconfig.tests.json && jest"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript"
+    ]
+  }
+}
